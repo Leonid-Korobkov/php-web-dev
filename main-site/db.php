@@ -1,11 +1,15 @@
 <?php
 require_once 'functions.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
 
 // Настройки подключения к базе данных
-$servername = "localhost";
-$username = "korobkov_leonid";
-$password_db = "leoK238501";
-$dbname = "korobkov_autoshow";
+$servername = $_ENV['DB_HOST'];
+$username = $_ENV['DB_USERNAME'];
+$password_db = $_ENV['DB_PASS'];
+$dbname = $_ENV['DB_NAME'];
 
 // Подключение к базе данных
 try {

@@ -1,40 +1,20 @@
 <?php
-// Подключаем файл подключения к базе данных
 require_once 'db.php';
 require_once 'functions.php';
 
-$user_id = check_cookie();
-if (!$user_id) {
-  header("Location: index.php");
-}
-// Если без куки и разграничения пользователя
-// Проверяем, передан ли user_id и является ли он числом
-// if (isset($_GET['user_id']) && is_numeric($_GET['user_id'])) {
-//   $user_id = $_GET['user_id'];
-// } else {
-//   echo "Некорректный идентификатор пользователя!";
-//   exit;
-// }
+session_start();
 
-// Используем подготовленные выражения для безопасности
-$query = $conn->prepare("SELECT * FROM user WHERE id = ?");
-$query->bind_param("i", $user_id);
-$query->execute();
-$result = $query->get_result();
+$user = getCurrentUser();
 
-if ($result->num_rows > 0) {
-  // Если пользователь найден
-  $user = $result->fetch_assoc();
+if ($user) {
+  // Путь к аватару пользователя
+  $full_path = "https://korobkov.xn--80ahdri7a.site/main-site/uploads/" . htmlspecialchars($user['id']) . "_" . htmlspecialchars($user['foto']);
 } else {
   echo "Пользователь не найден!";
   exit;
 }
 
-// Путь к аватару пользователя
-$full_path = "https://korobkov.xn--80ahdri7a.site/main-site/uploads/" . htmlspecialchars($user['id']) . "_" . htmlspecialchars($user['foto']);
-
 // Закрываем соединение
-$query->close();
 mysqli_close($conn);
 ?>
 
@@ -54,6 +34,7 @@ mysqli_close($conn);
         <!-- Хедер -->
         <?php include 'templates/header.php'; ?>
 
+
         <!-- Контейнер с аватаром и приветствием -->
         <div class="head">
           <div class="avatar-container">
@@ -64,6 +45,7 @@ mysqli_close($conn);
             <p><?php echo '<a href="exit.php" style="text-decoration: underline; color: crimson"><strong>Выйти</strong></a>'; ?></p>
             <p>Ваши регистрационные данные:</p>
             <p class="error">Адрес электронной почты не подтвержден!</p>
+            <p class="error">Идентификатор сессии: <?php echo session_id(); ?></p>
           </div>
         </div>
 

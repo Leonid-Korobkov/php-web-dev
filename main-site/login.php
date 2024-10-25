@@ -2,6 +2,7 @@
 // Подключаем файл подключения к базе данных
 require_once 'db.php';
 require_once 'functions.php';
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -58,13 +59,14 @@ require_once 'functions.php';
                   $query = "UPDATE user SET token='{$token}' WHERE id='{$user_id}';";
 
                   $row = mysqli_query($conn, $query);
+
+                  // Сохраняем данные в сессии
+                  $_SESSION['user_id'] = $user_id;
+                  $_SESSION['token'] = $token;
                   if (isset($_POST['stay_logged_in'])) {
-                    //Если установлена галочка «Оставаться на сайте», действие cookie продлеваем на 60 дней
-                    setcookie('user_id', $user_id, time() + 3600 * 24 * 60);
-                    setcookie('token', $token, time() + 3600 * 24 * 60);
-                  } else {
-                    setcookie('user_id', $user_id);
-                    setcookie('token', $token);
+                    // Устанавливаем параметры сессии для продления срока жизни
+                    ini_set('session.gc_maxlifetime', 5184000);  // 60 дней
+                    ini_set('session.cookie_lifetime', 5184000);
                   }
                   // Если логин и пароль верны, перенаправляем на страницу профиля
                   header("Location: /main-site/profile_user.php");

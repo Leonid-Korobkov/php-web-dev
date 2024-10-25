@@ -33,3 +33,43 @@ function clear_cookie()
   setcookie('token', '', time() - 2 * 3600 * 24 * 182);
   header("Location: index.php");
 }
+
+
+function startSession()
+{
+  // ini_set('session.gc_maxlifetime', 5184000);
+  // ini_set('session.cookie_lifetime', 5184000);
+  session_start();
+}
+
+function endSession()
+{
+  session_start();
+  session_unset();     // Очистка всех переменных сессии
+  session_destroy();   // Уничтожение сессии
+  header("Location: index.php");  // Перенаправление на главную страницу
+  exit();
+}
+
+function isAuthenticated()
+{
+  return isset($_SESSION['user_id']) && isset($_SESSION['token']);
+}
+
+function getCurrentUser()
+{
+  global $conn;
+  if (!isAuthenticated()) {
+    return null;
+  }
+
+  $user_id = $_SESSION['user_id'];
+  $query = $conn->prepare("SELECT * FROM user WHERE id = ?");
+  $query->bind_param("i", $user_id);
+  $query->execute();
+  $result = $query->get_result();
+
+  $user = $result->fetch_assoc();
+  $query->close();
+  return $user;
+}

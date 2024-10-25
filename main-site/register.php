@@ -1,6 +1,7 @@
 <?php
 // Подключаем файл подключения к базе данных
 require_once 'db.php';
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -92,8 +93,9 @@ require_once 'db.php';
 
               if ($msqq) {
                 $user_id = strval(mysqli_insert_id($conn));
-                setcookie('user_id', $user_id); // установим coockie
-                setcookie('token', $token);
+
+                $_SESSION['user_id'] = $user_id;
+                $_SESSION['token'] = $token;
 
                 // Загрузка файла аватарки
                 $target_dir = "uploads/" . $user_id . "_";
