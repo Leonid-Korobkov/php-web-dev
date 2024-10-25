@@ -1,0 +1,175 @@
+/* Общие стили */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Стили для заголовков и подзаголовков */
+header {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+h2 {
+    color: #444;
+    margin-top: 0;
+    font-size: 28px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Стили для формы */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Стили для полей ввода */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+}
+
+/* Стили для кнопок */
+.button>input {
+    padding: 12px 30px;
+    background: linear-gradient(to bottom, #007bff, #0056b3);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.button>input:hover {
+    background: linear-gradient(to bottom, #0056b3, #0047a1);
+}
+
+/* Стили для таблицы формы */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+/* Стили для заголовков столбцов */
+th:first-child {
+    width: 200px;
+}
+
+/* Стили для подсказок */
+.hint {
+    font-size: 12px;
+    color: #888;
+    margin-left: 220px;
+    opacity: 0.7;
+}
+
+button:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to right, transparent, #007bff);
+    transform: translateY(-50%);
+    z-index: -1;
+}
+
+button:hover:before {
+    animation: move 0.5s ease-in-out forwards;
+}
+
+@keyframes move {
+    100% {
+        transform: translateY(100%) translateX(100%);
+    }
+}
+
+
+.fa-times:before {
+    color: red !important;
+}
+
+.button>input:disabled {
+    background: #888 !important;
+}
+
+#valid_user_name,
+#invalid_user_name,
+#valid_user_last_name,
+#invalid_user_last_name,
+#valid_user_pic,
+#invalid_user_pic,
+#valid_email,
+#invalid_email,
+#valid_vk_url,
+#invalid_vk_url,
+#valid_username,
+#invalid_username,
+#valid_password,
+#invalid_password,
+#valid_pass2,
+#invalid_pass2 {
+    display: none;
+}
+
+#user_name:valid #valid_user_name,
+#user_last_name:valid #valid_user_last_name,
+#user_pic:valid #valid_user_pic,
+#email:valid #valid_email,
+#vk_url:valid #valid_vk_url,
+#username:valid #valid_username,
+#password:valid #valid_password,
+#pass2:valid #valid_pass2 {
+    display: inline-block !important;
+}
+
+#user_name:invalid #invalid_user_name,
+#user_last_name:invalid #invalid_user_last_name,
+#user_pic:invalid #invalid_user_pic,
+#email:invalid #invalid_email,
+#vk_url:invalid #invalid_vk_url,
+#username:invalid #invalid_username,
+#password:invalid #invalid_password,
+#pass2:invalid #invalid_pass2 {
+    display: inline-block !important;
+}
