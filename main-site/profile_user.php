@@ -44,7 +44,11 @@ mysqli_close($conn);
             <p>Добро пожаловать, <strong><?php echo htmlspecialchars($user['first_name']) . ' ' . htmlspecialchars($user['last_name']) ?></strong></p>
             <p><?php echo '<a href="exit.php" style="text-decoration: underline; color: crimson"><strong>Выйти</strong></a>'; ?></p>
             <p>Ваши регистрационные данные:</p>
-            <p class="error">Адрес электронной почты не подтвержден!</p>
+            <?php
+            if ($user['check_mail'] == 1) {
+              echo '<p class="error">Адрес электронной почты не подтвержден! <br>Пожалуйста, проверьте свой адрес электронной почты.</p>';
+            }
+            ?>
             <p class="error">Идентификатор сессии: <?php echo session_id(); ?></p>
           </div>
         </div>

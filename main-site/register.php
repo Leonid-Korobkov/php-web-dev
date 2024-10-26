@@ -97,6 +97,11 @@ session_start();
                 $_SESSION['user_id'] = $user_id;
                 $_SESSION['token'] = $token;
 
+                // Отправка подтверждающего письма
+                require 'email/send_main.php';
+
+                sendConfirmationEmail($email, $username, $token);
+
                 // Загрузка файла аватарки
                 $target_dir = "uploads/" . $user_id . "_";
                 $target_file = $target_dir . basename($_FILES["user_pic"]["name"]);
