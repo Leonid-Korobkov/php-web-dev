@@ -138,14 +138,9 @@ session_start();
 
                 if (move_uploaded_file($_FILES["user_pic"]["tmp_name"], $target_file)) {
                   $success = "Регистрация успешна!";
-                  // Перенаправление на страницу профиля
-                  // header("Location: /main-site/profile_user.php");
 
                   // Отправка подтверждающего письма
                   header("Location: /main-site/email/send_mail.php?user_username={$user_username}&email={$email}&token={$token}");
-                  exit();
-                  // require 'email/send_mail.php';
-                  // sendConfirmationEmail($email, $user_username, $token);
                   exit();
                 } else {
                   $error = "Ошибка загрузки файла.";

@@ -21,7 +21,3 @@ try {
   handl_error($error, $e->getMessage());
   exit();
 }
-
-// if (!$conn) {
-//   die("Ошибка подключения: " . mysqli_connect_error());
-// }
