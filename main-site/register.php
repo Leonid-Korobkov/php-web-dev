@@ -97,11 +97,6 @@ session_start();
                 $_SESSION['user_id'] = $user_id;
                 $_SESSION['token'] = $token;
 
-                // Отправка подтверждающего письма
-                require 'email/send_main.php';
-
-                sendConfirmationEmail($email, $username, $token);
-
                 // Загрузка файла аватарки
                 $target_dir = "uploads/" . $user_id . "_";
                 $target_file = $target_dir . basename($_FILES["user_pic"]["name"]);
@@ -144,7 +139,13 @@ session_start();
                 if (move_uploaded_file($_FILES["user_pic"]["tmp_name"], $target_file)) {
                   $success = "Регистрация успешна!";
                   // Перенаправление на страницу профиля
-                  header("Location: /main-site/profile_user.php");
+                  // header("Location: /main-site/profile_user.php");
+
+                  // Отправка подтверждающего письма
+                  header("Location: /main-site/email/send_mail.php?user_username={$user_username}&email={$email}&token={$token}");
+                  exit();
+                  // require 'email/send_mail.php';
+                  // sendConfirmationEmail($email, $user_username, $token);
                   exit();
                 } else {
                   $error = "Ошибка загрузки файла.";
@@ -186,7 +187,7 @@ session_start();
 
           <div class="form-group">
             <label for="first_name">Имя:
-              <input type="text" name="first_name" minlength="3" maxlength="20" required
+              <input autocomplete="on" type="text" name="first_name" minlength="3" maxlength="20" required
                 pattern="(^[A-Za-z]+$)|(^[А-ЯЁа-яё]+$)" id='user_name' placeholder="Обязательное поле"
                 value="<?php echo htmlspecialchars($first_name); ?>">
               <span class="icon fa fa-check valid-i" id='valid_user_name'></span>
@@ -197,7 +198,7 @@ session_start();
 
           <div class="form-group">
             <label for="last_name">Фамилия:
-              <input type="text" name="last_name" required pattern="(^[A-Za-z]+$)|(^[А-ЯЁа-яё]+$)" minlength="3"
+              <input autocomplete="on" type="text" name="last_name" required pattern="(^[A-Za-z]+$)|(^[А-ЯЁа-яё]+$)" minlength="3"
                 maxlength="20" placeholder="Обязательное поле" id="user_last_name"
                 value="<?php echo htmlspecialchars($last_name); ?>">
               <span class="icon fa fa-check valid-i" id='valid_user_last_name'></span>
@@ -217,7 +218,7 @@ session_start();
 
           <div class="form-group">
             <label for="email">E-mail:
-              <input type="email" name="email" id="email" required placeholder="Обязательное поле"
+              <input autocomplete="on" type="email" name="email" id="email" required placeholder="Обязательное поле"
                 value="<?php echo htmlspecialchars($email); ?>">
               <span class="icon fa fa-check valid-i" id='valid_e_mail'></span>
               <span class="icon fa fa-times invalid-i" id='invalid_e_mail'></span>
@@ -226,7 +227,7 @@ session_start();
 
           <div class="form-group">
             <label for="user_username">Логин:
-              <input type="text" name="user_username" minlength="3" maxlength="20" required id="user_username"
+              <input autocomplete="on" type="text" name="user_username" minlength="3" maxlength="20" required id="user_username"
                 pattern="^[\w]+$" placeholder="Обязательное поле"
                 value="<?php echo htmlspecialchars($user_username); ?>">
               <span class="icon fa fa-check valid-i" id='valid_user_username'></span>

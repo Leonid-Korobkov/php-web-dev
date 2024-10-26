@@ -1,9 +1,5 @@
 <?php
 require_once 'functions.php';
-require_once __DIR__ . '/../vendor/autoload.php';
-
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
-$dotenv->load();
 
 // Настройки подключения к базе данных
 $servername = $_ENV['DB_HOST'];

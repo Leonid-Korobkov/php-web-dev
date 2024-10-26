@@ -1,4 +1,9 @@
 <?php
+require_once __DIR__ . '/../vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
+
 function handl_error($error_message, $system_error_message)
 {
   header("Location: /main-site/error.php?" . "error_message={$error_message}&" .
