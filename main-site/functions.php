@@ -1,6 +1,5 @@
 <?php
 require_once __DIR__ . '/../vendor/autoload.php';
-
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
@@ -40,13 +39,7 @@ function clear_cookie()
 }
 
 
-function startSession()
-{
-  // ini_set('session.gc_maxlifetime', 5184000);
-  // ini_set('session.cookie_lifetime', 5184000);
-  session_start();
-}
-
+// ---------------- SESSION ----------------
 function endSession()
 {
   session_start();

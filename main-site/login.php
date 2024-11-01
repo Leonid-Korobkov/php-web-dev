@@ -64,8 +64,8 @@ session_start();
                   $_SESSION['user_id'] = $user_id;
                   $_SESSION['token'] = $token;
                   if (isset($_POST['stay_logged_in'])) {
-                    // Устанавливаем параметры сессии для продления срока жизни
-                    ini_set('session.gc_maxlifetime', 5184000);  // 60 дней
+                    // Устанавливаем параметры сессии для продления срока жизни на 60 дней
+                    ini_set('session.gc_maxlifetime', 5184000);
                     ini_set('session.cookie_lifetime', 5184000);
                   }
                   // Если логин и пароль верны, перенаправляем на страницу профиля
