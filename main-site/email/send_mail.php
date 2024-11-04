@@ -12,8 +12,6 @@ $email = $_GET['email'];
 $username = $_GET['user_username'];
 $email_token = $_GET['token'];
 
-// function sendConfirmationEmail($email, $username, $email_token)
-// {
 $mail = new PHPMailer(true);
 $confirmation_link = "https://korobkov.xn--80ahdri7a.site/main-site/email/confirm.php?token=$email_token";
 $titleMail = "Подтверждение регистрации на сайте автосалона";
@@ -46,12 +44,9 @@ try {
   $mail->send();
 
   echo "Письмо успешно отправлено";
-  // Задержка в 1 секунду
-  sleep(1);
 
   // Перенаправление на страницу профиля
   header("Location: /main-site/profile_user.php");
 } catch (Exception $e) {
   echo "Ошибка при отправке письма: {$mail->ErrorInfo}";
 }
-// }
