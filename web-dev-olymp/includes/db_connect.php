@@ -8,10 +8,10 @@ function handl_error($error_message, $system_error_message)
 }
 
 
-$servername = 'localhost';
-$username = 'korobkov_olymp';
-$password_db = 'leoK238501';
-$dbname = 'korobkov_olymp';
+$servername = '';
+$username = '';
+$password_db = '';
+$dbname = '';
 
 // Подключение к базе данных
 try {
